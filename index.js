@@ -107,7 +107,7 @@ async function app() {
             }
         }
         console.log(keypoints);
-        drawSkeleton(keypoints, minPoseConfidence, ctx, 1);
+        drawSkeleton(pose.keypoints, minPoseConfidence, ctx, 1);
 
         // drawKeypoints(pose.keypoints, minPoseConfidence, ctx);
         await tf.nextFrame();
