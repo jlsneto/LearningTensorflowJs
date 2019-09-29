@@ -1,38 +1,18 @@
 <html>
 
 <head>
-    <!-- Load the latest version of TensorFlow.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
-    <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
-    <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
-
     <style>
         html,
         body {
-            margin: px;
+            margin: 0px;
             padding: 0px;
         }
     </style>
 </head>
 
 <body>
-    <div id="console"></div>
-    <div id="result"></div>
-    <!-- Add an image that we will use to test -->
-    <!--style='display:none'-->
-    <div id='main'>
-        <video autoplay playsinline style=" -moz-transform: scaleX(-1);
-        -o-transform: scaleX(-1);
-        -webkit-transform: scaleX(-1);
-        transform: scaleX(-1);
-        display: none;
-        " id="webcam"></video>
-        <canvas id="output">
-        </canvas>
-    </div>
+    <video id="video" autoplay style="display:none"></video>
     <div id="root"></div>
-    <!-- Load index.js after the content of the page -->
     <script src="index.js"></script>
 </body>
 
