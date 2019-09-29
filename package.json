@@ -1,0 +1,24 @@
+{
+  "name": "learningtensorflowjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel serve ./src/index.html --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlsneto/LearningTensorflowJs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlsneto/LearningTensorflowJs/issues"
+  },
+  "homepage": "https://github.com/jlsneto/LearningTensorflowJs#readme",
+  "dependencies": {
+    "parcel": "^1.12.3",
+    "three": "^0.108.0"
+  }
+}

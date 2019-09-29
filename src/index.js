@@ -1,4 +1,9 @@
-let net;
+import Engine from "./Engine";
+
+const root = document.getElementById("root");
+const engine = new Engine(root, window.innerWidth, window.innerHeight);
+
+/**let net;
 const videoWidth = 500;
 const videoHeight = 500;
 const video = document.getElementById('webcam');
@@ -162,3 +167,4 @@ function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
 }
 
 app();
+*/
