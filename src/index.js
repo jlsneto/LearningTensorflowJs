@@ -8,13 +8,25 @@ import VideoRenderer from "./VideoRenderer";
 const video = document.getElementById("video");
 const root = document.getElementById("root");
 
-const poseNet = new PoseNet(512, 512);
+const poseNet = new PoseNet(513);
 const engine = new Engine(root, window.innerWidth, window.innerHeight, true);
 
 const videoRenderer = new VideoRenderer(video, engine.scene);
 
+let poseNetLocked = false;
+const update = async () => {
+    // Limita a execução do posenet a 100 milisegundos por vez
+    if (poseNetLocked) return;
+    poseNetLocked = true;
+    setTimeout(async () => {
+        const pose = await poseNet.estimate(video);
+        console.log(pose);
+        poseNetLocked = false;
+    }, 100);
+}
+
 const loadWebcam = async () => {
-    console.log("carregando webcam")
+    console.log("Carregando webcam...")
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const constraints = {
             video: { width: 1280, height: 720, facingMode: 'user' }
@@ -23,7 +35,7 @@ const loadWebcam = async () => {
             const stream = await navigator.mediaDevices.getUserMedia(constraints)
             video.srcObject = stream;
             video.play();
-            console.log("Webcam pronta");
+            console.log("Webcam pronta!");
         } catch (e) {
             console.error("Não foi possivel obter a streaming da webcam");
             console.error(e);
@@ -36,7 +48,7 @@ const loadWebcam = async () => {
 const loadPoseNet = async () => {
     console.log("Carregando posenet...");
     await poseNet.load();
-
+    engine.addUpdateObserver(update);
     console.log("PoseNet pronto!");
 }
 
