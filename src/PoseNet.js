@@ -1,20 +1,9 @@
 import * as posenet from '@tensorflow-models/posenet';
 
-const poseReference = {
-    "nose": 0,
-    "leftEye": 1,
-    "rightEye": 2,
-    "leftShoulder": 5,
-    "rightShoulder": 6,
-    "leftElbow": 7,
-    "rightElbow": 8,
-    "leftWrist": 9,
-    "rightWrist": 10,
-    "leftHip": 11,
-    "rightHip": 12
-};
-
 export default class PoseNet {
+
+    net = null;
+
     constructor(resolution) {
         this.resolution = resolution;
     }
@@ -26,7 +15,7 @@ export default class PoseNet {
         this.net = await posenet.load({
             architecture: 'MobileNetV1',
             outputStride: 16,
-            inputResolution: this.resolution,
+            inputResolution: 513,
             multiplier: 0.75
         });
     }
@@ -37,8 +26,9 @@ export default class PoseNet {
      */
     estimate = async (entrie) => {
         const pose = await this.net.estimateSinglePose(entrie, {
-            flipHorizontal: true,
+            flipHorizontal: false,
         });
+        console.log(pose);
 
         return pose;
     }

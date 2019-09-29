@@ -1,9 +1,30 @@
-
+import { SphereGeometry, Mesh, MeshBasicMaterial } from "three";
+import { poseReference } from "./constants";
 
 export default class PoseDebugger {
 
-    constructor() {
-      
+    minPoseConfidence = 0.5;
+    sphereKeypoints = [];
+
+    constructor(scene) {
+        Object.entries(poseReference).forEach(() => {
+            const geometry = new SphereGeometry(0.01, 0.01, 0.01);
+            const material = new MeshBasicMaterial({ color: "red" });
+            const mesh = new Mesh(geometry, material);
+            mesh.position.set(0, 0, -2);
+            scene.add(mesh);
+            this.sphereKeypoints.push(mesh);
+        });
+    }
+
+    moveKeypoints = (keypoints) => {
+        Object.entries(poseReference).forEach(([name, key], index) => {
+            const { score, position } = keypoints[key];
+            if (score <= this.minPoseConfidence) {
+                const { x, y } = position;
+                this.sphereKeypoints[index].position.set(x, y, -2);
+            }
+        });
     }
 }
 

@@ -36,13 +36,14 @@ export default class Engine {
     update = () => {
         if (this.debug) this.stats.begin();
 
-        // Renderiza a cena
-        this.renderer.render(this.scene, this.camera);
         // Chama todos os metodos do observer
         this.updateObservers.forEach(method => method());
 
+        // Renderiza a cena
+        this.renderer.render(this.scene, this.camera);
+
         if (this.debug) this.stats.end();
-        
+
         // Chama o proximo frame
         requestAnimationFrame(this.update);
     }
